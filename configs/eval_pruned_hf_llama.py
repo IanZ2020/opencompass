@@ -5,4 +5,4 @@ with read_base():
     from .models.hf_llama.pruned_hf_llama_13b import models
 
 
-datasets = [*humaneval_datasets, *hellaswag_datasets,  *piqa_datasets, *siqa_datasets, *winogrande_datasets, *ARC_e_datasets, *ARC_c_datasets, *mbpp_datasets, *obqa_datasets, *commonsenseqa_datasets, *nq_datasets, *triviaqa_datasets, *squad20_datasets, *BoolQ_datasets, *gsm8k_datasets, *math_datasets]
+datasets = [*humaneval_datasets, *hellaswag_datasets,  *piqa_datasets, *siqa_datasets, *winogrande_datasets, *ARC_e_datasets, *ARC_c_datasets, *mbpp_datasets, *obqa_datasets, *commonsenseqa_datasets, *nq_datasets, *triviaqa_datasets, *squad20_datasets, *BoolQ_datasets, *gsm8k_datasets,  *math_datasets]
