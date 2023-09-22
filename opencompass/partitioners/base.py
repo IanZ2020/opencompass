@@ -64,6 +64,8 @@ class BasePartitioner:
                 tgt_ptr[key_chain[-1]] = ori_ptr[key_chain[-1]]
             except AttributeError:
                 self.logger.warning(f'Key {k} not found in config, ignored.')
+            except KeyError:
+                self.logger.warning(f'Key {k} not found in config, ignored.')
 
         tasks = self.partition(models,
                                datasets,
