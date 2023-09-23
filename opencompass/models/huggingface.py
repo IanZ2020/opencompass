@@ -398,6 +398,7 @@ class HuggingFaceCausalLM(HuggingFace):
             self.model = PeftModel.from_pretrained(self.model,
                                                    peft_path,
                                                    is_trainable=False)
+        self.model.config.use_cache = True
         self.model.eval()
 
 class PrunedllamaCausalLM(HuggingFace):
@@ -440,3 +441,4 @@ class PrunedllamaCausalLM(HuggingFace):
                                                    peft_path,
                                                    is_trainable=False)
         self.model.eval()
+        self.model.config.use_cache = True
