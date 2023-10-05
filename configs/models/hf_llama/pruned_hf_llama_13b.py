@@ -4,9 +4,8 @@ models = [
     # LLaMA 13B
     dict(
         type=PrunedllamaCausalLM,
-        abbr='pruned-llama-13b-hf',
-        path="/home/zhangyihan/LMFlow/prune_log/llama-13b-mha-2-38-0.25-mlp-0.25-wikitext-512exm-1024--first",
-        tokenizer_path='/home/zhangyihan/LMFlow/prune_log/llama-13b-mha-2-38-0.25-mlp-0.25-wikitext-512exm-1024--first',
+        abbr='pruned-llama-13b-hf-recover-red',
+        path="/home/zhangyihan/LMFlow/prune_log/llama-13b-mlp-mha-2-38-0.25-4096red1024-paramfirst-firstabs",
         tokenizer_kwargs=dict(padding_side='left',
                               truncation_side='left',
                               use_fast=False,
