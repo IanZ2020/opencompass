@@ -1,7 +1,7 @@
 from mmengine.config import read_base
 
 with read_base():
-    from .datasets.collections.base_medium_llama import humaneval_datasets, hellaswag_datasets,  piqa_datasets, siqa_datasets, winogrande_datasets, ARC_e_datasets, ARC_c_datasets, mbpp_datasets, obqa_datasets, commonsenseqa_datasets, nq_datasets, triviaqa_datasets, squad20_datasets, BoolQ_datasets, gsm8k_datasets, math_datasets, mmlu_datasets, bbh_datasets
+    from .datasets.collections.base_medium_llama import humaneval_datasets, hellaswag_datasets,  piqa_datasets, siqa_datasets, winogrande_datasets, ARC_e_datasets, ARC_c_datasets, mbpp_datasets, obqa_datasets, commonsenseqa_datasets, nq_datasets, triviaqa_datasets, squad20_datasets, BoolQ_datasets, gsm8k_datasets, math_datasets, mmlu_datasets, bbh_datasets, nq_retrieval_datasets, triviaqa_retrieval_datasets
 
 from opencompass.models import PrunedllamaCausalLM
 
@@ -25,7 +25,7 @@ models = [
 ]
 
 #full eval
-datasets = [*humaneval_datasets, *mbpp_datasets, *hellaswag_datasets,  *piqa_datasets, *siqa_datasets, *winogrande_datasets, *ARC_e_datasets, *ARC_c_datasets, *obqa_datasets, *commonsenseqa_datasets, *nq_datasets, *triviaqa_datasets, *squad20_datasets, *BoolQ_datasets, *gsm8k_datasets,  *math_datasets, *mmlu_datasets, *bbh_datasets]
+datasets = [*humaneval_datasets, *mbpp_datasets, *hellaswag_datasets,  *piqa_datasets, *siqa_datasets, *winogrande_datasets, *ARC_e_datasets, *ARC_c_datasets, *obqa_datasets, *commonsenseqa_datasets, *nq_datasets, *nq_retrieval_datasets, *triviaqa_datasets, *triviaqa_retrieval_datasets, *squad20_datasets, *BoolQ_datasets, *gsm8k_datasets,  *math_datasets, *mmlu_datasets, *bbh_datasets]
 
 # #short eval
 # datasets = [*hellaswag_datasets,  *piqa_datasets, *siqa_datasets, *winogrande_datasets, *ARC_e_datasets, *ARC_c_datasets, *obqa_datasets, *commonsenseqa_datasets, *nq_datasets, *triviaqa_datasets, *squad20_datasets, *BoolQ_datasets, *mmlu_datasets]
