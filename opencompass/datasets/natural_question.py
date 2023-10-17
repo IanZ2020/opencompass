@@ -1,6 +1,6 @@
 import csv
 import os.path as osp
-
+import json
 from datasets import Dataset, DatasetDict
 
 from opencompass.openicl.icl_evaluator import BaseEvaluator
@@ -30,6 +30,32 @@ class NaturalQuestionDataset(BaseDataset):
                     raw_data.append({'question': question, 'answer': answers})
                 dataset[split] = Dataset.from_list(raw_data)
 
+        return dataset
+
+@LOAD_DATASET.register_module()
+class NaturalQuestionRetrievalDataset(BaseDataset):    
+    @staticmethod
+    def load(path:str):
+        num_of_evidence=1
+        dataset = DatasetDict()
+        for split in ['dev', 'test']:
+            filename = osp.join(path, f'{split}.json')
+            with open(filename) as f:
+                reader = json.load(f)
+                raw_data = []
+                for data in reader:
+                    ctxs = []
+                    question = data['question']
+                    answers = data['answers']
+                    if split == 'dev':
+                        answers = answers[0]
+                    raw_ctxs = data['ctxs']
+                    for i, raw_ctx in enumerate(raw_ctxs[0:num_of_evidence]):
+                        ctxs.append(f'{i}. {raw_ctx["text"]}')
+                    context = "".join(ctxs)
+                    raw_data.append({'question': question, 'answer': answers, 'context': context})
+                dataset[split] = Dataset.from_list(raw_data)
+        
         return dataset
 
 

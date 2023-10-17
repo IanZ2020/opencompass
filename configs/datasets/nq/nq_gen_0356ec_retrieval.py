@@ -1,9 +1,9 @@
 from opencompass.openicl.icl_prompt_template import PromptTemplate
 from opencompass.openicl.icl_retriever import ZeroRetriever, FixKRetriever
 from opencompass.openicl.icl_inferencer import GenInferencer
-from opencompass.datasets import NaturalQuestionDataset, NQEvaluator
+from opencompass.datasets import NaturalQuestionRetrievalDataset, NQEvaluator
 
-nq_datasets = []
+nq_retrieval_datasets = []
 for k in [5]:
     nq_reader_cfg = dict(
         input_columns=['question'], output_column='answer', train_split='dev')
@@ -14,7 +14,7 @@ for k in [5]:
                 type=PromptTemplate,
                 template=dict(
                     round=[
-                        dict(role='HUMAN', prompt='Answer these questions, your answer should be as simple as possible, start your answer with the prompt \'The answer is \'.\nQ: {question}?'),
+                        dict(role='HUMAN', prompt='{context}\nAccording to the above evidences, answer the following question. Your answer should be as simple as possible, start your answer with the prompt \'The answer is \'.\nQ: {question}?'),
                         dict(role='BOT', prompt='A:'),
                     ]
                 )
@@ -28,7 +28,7 @@ for k in [5]:
                 type=PromptTemplate,
                 template=dict(
                     round=[
-                        dict(role='HUMAN', prompt='Answer the question, your answer should be as simple as possible, start your answer with the prompt \'The answer is \'.\nQ: {question}?'),
+                        dict(role='HUMAN', prompt='{context}\nAccording to the above evidences, answer the following question. Your answer should be as simple as possible, start your answer with the prompt \'The answer is \'.\nQ: {question}?'),
                         dict(role='BOT', prompt='A: The answer is {answer}.\n'),
                     ]
                 ),
@@ -38,7 +38,7 @@ for k in [5]:
                 template=dict(
                     begin="</E>",
                     round=[
-                        dict(role='HUMAN', prompt='Answer the question, your answer should be as simple as possible, start your answer with the prompt \'The answer is \'.\nQ: {question}?'),
+                        dict(role='HUMAN', prompt='{context}\nAccording to the above evidences, answer the following question. Your answer should be as simple as possible, start your answer with the prompt \'The answer is \'.\nQ: {question}?'),
                         dict(role='BOT', prompt='A:'),
                     ]
                 ),
@@ -50,11 +50,11 @@ for k in [5]:
 
     nq_eval_cfg = dict(evaluator=dict(type=NQEvaluator), pred_role="BOT")
 
-    nq_datasets.append(
+    nq_retrieval_datasets.append(
         dict(
-            type=NaturalQuestionDataset,
-            abbr='nq' if k == 0 else f'nq_{k}shot',
-            path='./data/nq/',
+            type=NaturalQuestionRetrievalDataset,
+            abbr='nq_retrieval' if k == 0 else f'nq_retrieval_{k}shot',
+            path='./data/nq_retrieval/',
             reader_cfg=nq_reader_cfg,
             infer_cfg=nq_infer_cfg,
             eval_cfg=nq_eval_cfg)

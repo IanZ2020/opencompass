@@ -2,7 +2,7 @@ import csv
 import os.path as osp
 
 from datasets import Dataset, DatasetDict
-
+import json
 from opencompass.openicl.icl_evaluator import BaseEvaluator
 from opencompass.registry import ICL_EVALUATORS, LOAD_DATASET
 from opencompass.utils.text_postprocessors import general_postprocess
@@ -29,6 +29,32 @@ class TriviaQADataset(BaseDataset):
                         answers = answers[0]
                     raw_data.append({'question': question, 'answer': answers})
                 dataset[split] = Dataset.from_list(raw_data)
+        return dataset
+    
+@LOAD_DATASET.register_module()
+class TriviaQARetrievalDataset(BaseDataset):    
+    @staticmethod
+    def load(path:str):
+        num_of_evidence=1
+        dataset = DatasetDict()
+        for split in ['dev', 'test']:
+            filename = osp.join(path, f'trivia_{split}_retrieval.json')
+            with open(filename) as f:
+                reader = json.load(f)
+                raw_data = []
+                for data in reader:
+                    ctxs = []
+                    question = data['question']
+                    answers = data['answers']
+                    if split == 'test':
+                        answers = answers[0]
+                    raw_ctxs = data['ctxs']
+                    for i, raw_ctx in enumerate(raw_ctxs[0:num_of_evidence]):
+                        ctxs.append(f'{i}. {raw_ctx["text"]}')
+                    context = "".join(ctxs)
+                    raw_data.append({'question': question, 'answer': answers, 'context': context})
+                dataset[split] = Dataset.from_list(raw_data)
+        
         return dataset
 
 
