@@ -5,7 +5,7 @@ from opencompass.datasets import TriviaQADataset, TriviaQAEvaluator
 
 
 triviaqa_datasets = []
-for k in [5]:
+for k in [0,1,5]:
     triviaqa_reader_cfg = dict(
         input_columns=['question'], output_column='answer', train_split='test', test_split='dev')
 

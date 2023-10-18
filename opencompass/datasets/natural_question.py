@@ -51,8 +51,8 @@ class NaturalQuestionRetrievalDataset(BaseDataset):
                         answers = answers[0]
                     raw_ctxs = data['ctxs']
                     for i, raw_ctx in enumerate(raw_ctxs[0:num_of_evidence]):
-                        ctxs.append(f'{i}. {raw_ctx["text"]}')
-                    context = "".join(ctxs)
+                        ctxs.append(f'{i+1}. {raw_ctx["text"]}')
+                    context = "\n".join(ctxs)
                     raw_data.append({'question': question, 'answer': answers, 'context': context})
                 dataset[split] = Dataset.from_list(raw_data)
         

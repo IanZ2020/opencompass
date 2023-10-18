@@ -4,7 +4,7 @@ from opencompass.openicl.icl_inferencer import GenInferencer
 from opencompass.datasets import NaturalQuestionRetrievalDataset, NQEvaluator
 
 nq_retrieval_datasets = []
-for k in [5]:
+for k in [0,1,5]:
     nq_reader_cfg = dict(
         input_columns=['question'], output_column='answer', train_split='dev')
 
