@@ -14,7 +14,7 @@ for k in [0,1,5]:
                 type=PromptTemplate,
                 template=dict(
                     round=[
-                        dict(role='HUMAN', prompt='{context}\nAccording to the above evidences, answer the following question. Your answer should be as simple as possible, start your answer with the prompt \'The answer is \'.\nQ: {question}?'),
+                        dict(role='HUMAN', prompt='Evidences: {context}\nAccording to the above evidences, answer the following question. Your answer should be as simple as possible, start your answer with the prompt \'The answer is \'.\nQ: {question}?'),
                         dict(role='BOT', prompt='A:'),
                     ]
                 )
@@ -28,7 +28,7 @@ for k in [0,1,5]:
                 type=PromptTemplate,
                 template=dict(
                     round=[
-                        dict(role='HUMAN', prompt='{context}\nAccording to the above evidences, answer the following question. Your answer should be as simple as possible, start your answer with the prompt \'The answer is \'.\nQ: {question}?'),
+                        dict(role='HUMAN', prompt='Evidence: {context}\nAccording to the above evidences, answer the following question. Your answer should be as simple as possible, start your answer with the prompt \'The answer is \'.\nQ: {question}?'),
                         dict(role='BOT', prompt='A: The answer is {answer}.\n'),
                     ]
                 ),
@@ -38,7 +38,7 @@ for k in [0,1,5]:
                 template=dict(
                     begin="</E>",
                     round=[
-                        dict(role='HUMAN', prompt='{context}\nAccording to the above evidences, answer the following question. Your answer should be as simple as possible, start your answer with the prompt \'The answer is \'.\nQ: {question}?'),
+                        dict(role='HUMAN', prompt='Evidence: {context}\nAccording to the above evidences, answer the following question. Your answer should be as simple as possible, start your answer with the prompt \'The answer is \'.\nQ: {question}?'),
                         dict(role='BOT', prompt='A:'),
                     ]
                 ),
