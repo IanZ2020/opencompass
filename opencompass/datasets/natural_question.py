@@ -38,7 +38,7 @@ class NaturalQuestionRetrievalDataset(BaseDataset):
     def load(path:str):
         num_of_evidence=2
         dataset = DatasetDict()
-        for split in ['dev', 'test']:
+        for split in ['test']:
             filename = osp.join(path, f'nq_{split}_multi_retrieval.json')
             with open(filename) as f:
                 reader = json.load(f)

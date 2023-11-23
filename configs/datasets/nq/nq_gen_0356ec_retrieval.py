@@ -4,9 +4,9 @@ from opencompass.openicl.icl_inferencer import GenInferencer
 from opencompass.datasets import NaturalQuestionRetrievalDataset, NQEvaluator
 
 nq_retrieval_datasets = []
-for k in [0,1,5]:
+for k in [5]:
     nq_reader_cfg = dict(
-        input_columns=['question'], output_column='answer', train_split='dev')
+        input_columns=['question'], output_column='answer', train_split='test')
 
     if k == 0:
         nq_infer_cfg = dict(
@@ -53,8 +53,8 @@ for k in [0,1,5]:
     nq_retrieval_datasets.append(
         dict(
             type=NaturalQuestionRetrievalDataset,
-            abbr='nq_retrieval' if k == 0 else f'nq_retrieval_{k}shot',
-            path='./data/nq_retrieval/',
+            abbr='nq_adv_retrieval' if k == 0 else f'nq_adv_retrieval_{k}shot',
+            path='./data/nq_retrieval/single-adv-hn/',
             reader_cfg=nq_reader_cfg,
             infer_cfg=nq_infer_cfg,
             eval_cfg=nq_eval_cfg)
