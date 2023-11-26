@@ -3,7 +3,8 @@ from typing import Dict, List, Optional, Union
 
 import numpy as np
 import torch
-
+import sys
+sys.path.append("/home/zhangyihan/LMFlow/src")
 from opencompass.models.base import BaseModel
 from opencompass.registry import MODELS
 from opencompass.utils.logging import get_logger
